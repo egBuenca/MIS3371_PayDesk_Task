@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PayDesk - Campus Transaction Desk</title>
+
+<!--
+  PayDesk - index.html
+  THE STRUCTURE. Three files, three jobs:
+
+    index.html   what is on the page
+    style.css    what it looks like
+    app.js       what it does
+
+  There is no styling in this file and no behaviour in this file. If
+  you ever find yourself writing style="..." or onclick="..." here,
+  that is the signal you are putting something in the wrong layer.
+-->
+
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap bar">
+    <div class="brand">
+      <span class="dot"></span>
+      <strong>PayDesk</strong>
+      <span class="muted">Campus Transaction Desk</span>
+    </div>
+    <label class="switch">
+      <input type="checkbox" id="layerToggle">
+      <span>Show which layer does what</span>
+    </label>
+  </div>
+</header>
+
+<main class="wrap grid">
+
+  <section class="card" data-layer="css"
+           data-layer-note="CSS - layout, colour, and what each state looks like">
+    <h2>New payment</h2>
+    <p class="muted small">
+      Every field is checked as you leave it, and the whole form is
+      checked again before anything is recorded.
+    </p>
+
+    <form id="payForm" novalidate data-layer="js"
+          data-layer-note="JavaScript - reads the fields, decides, updates the page">
+
+      <div class="field">
+        <label for="account">Pay from</label>
+        <select id="account" name="account"></select>
+        <p class="err" data-for="account"></p>
+      </div>
+
+      <div class="field">
+        <label for="payee">Pay to</label>
+        <input id="payee" name="payee" type="text" autocomplete="off"
+               maxlength="60" placeholder="Bursar's Office">
+        <p class="err" data-for="payee"></p>
+      </div>
+
+      <div class="two">
+        <div class="field">
+          <label for="amount">Amount (USD)</label>
+          <input id="amount" name="amount" type="text" inputmode="decimal"
+                 placeholder="0.00">
+          <p class="err" data-for="amount"></p>
+        </div>
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category" name="category">
+            <option value="">Choose...</option>
+            <option value="tuition">Tuition</option>
+            <option value="housing">Housing</option>
+            <option value="books">Books</option>
+            <option value="meal-plan">Meal plan</option>
+            <option value="other">Other</option>
+          </select>
+          <p class="err" data-for="category"></p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="reference">Note <span class="muted small">(optional)</span></label>
+        <input id="reference" name="reference" type="text" maxlength="80"
+               placeholder="Fall semester balance">
+        <p class="err" data-for="reference"></p>
+        <p class="counter"><span id="refCount">0</span>/60</p>
+      </div>
+
+      <div class="actions">
+        <button class="primary" type="submit" id="submitBtn">Send payment</button>
+      </div>
+
+      <p class="hint small">
+        $10,000.00 per payment, $25,000.00 per day. Anything from
+        $5,000.00 up is held for review, and the same payee and amount
+        twice inside a minute is held as a possible duplicate.
+      </p>
+    </form>
+  </section>
+
+  <section class="stack">
+    <div class="card" id="result" data-layer="js"
+         data-layer-note="JavaScript - the decision, written into the page">
+      <h2>Receipt</h2>
+      <p class="muted">Nothing sent yet. Fill in the form and press
+        <em>Send payment</em>.</p>
+    </div>
+
+    <div class="card">
+      <h2>Activity</h2>
+      <div class="totals" id="totals"></div>
+      <table class="ledger">
+        <thead>
+          <tr><th>Reference</th><th>Payee</th><th class="r">Amount</th>
+              <th>Status</th></tr>
+        </thead>
+        <tbody id="ledger"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <span class="tag css">CSS</span> how it looks &nbsp;·&nbsp;
+  <span class="tag js">JavaScript</span> what it does and what it decides
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

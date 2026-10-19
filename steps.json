@@ -1,0 +1,289 @@
+{
+ "steps": [
+  {
+   "id": "0",
+   "mins": 3,
+   "layer": "both",
+   "title": "Open the finished app and the three empty files",
+   "say": [
+    "Start from the end. Open reference/index.html, make one payment, and let them see what they are aiming at.",
+    "Then tick the layer toggle in the header. Blue is CSS, purple is JavaScript. Say the sentence you will repeat all session: CSS decides what it looks like, JavaScript decides what is true.",
+    "Now close it and open the starter. index.html is finished - nobody writes markup today. style.css has nine TODOs, app.js has twelve."
+   ],
+   "code": null,
+   "show": "Finished app, then the layer view, then the starter's empty files side by side in VS Code.",
+   "check": "Everyone can open index.html in a browser and see the unstyled form. If the page is blank, they opened the wrong file."
+  },
+  {
+   "id": "1",
+   "mins": 4,
+   "layer": "css",
+   "todo": "C1 + C2",
+   "title": "Tokens first, then the page basics",
+   "say": [
+    "Name every colour once, at the top, and never type a hex code again below this block.",
+    "Ask them why --brand instead of #c8102e in forty places. The answer is the one-line change when Marketing picks a new red.",
+    "box-sizing: border-box on everything is the line that stops padding breaking your widths. Set it once and forget it."
+   ],
+   "code": {
+    "lang": "css",
+    "text": ":root {\n  --bg:        #f6f7f9;\n  --surface:   #ffffff;\n  --ink:       #15181d;\n  --muted:     #6b7280;\n  --line:      #e3e6ea;\n  --brand:     #c8102e;\n  --brand-ink: #ffffff;\n  --ok:        #1f7a45;\n  --ok-bg:     #e9f6ee;\n  --warn:      #9a6100;\n  --warn-bg:   #fdf3e2;\n  --bad:       #b3261e;\n  --bad-bg:    #fdecec;\n  --radius:    14px;\n  --shadow:    0 1px 2px rgba(16,24,40,.06), 0 8px 24px rgba(16,24,40,.06);\n  --font:      system-ui, -apple-system, \"Segoe UI\", Roboto, Arial, sans-serif;\n  --mono:      ui-monospace, \"Cascadia Mono\", Consolas, monospace;\n}\n\n* { box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  background: var(--bg);\n  color: var(--ink);\n  font-family: var(--font);\n  font-size: 16px;\n  line-height: 1.5;\n}\n\nbody {\n  margin: 0;\n  background: var(--bg);\n  color: var(--ink);\n  font-family: var(--font);\n  font-size: 16px;\n  line-height: 1.5;\n}"
+   },
+   "show": "Reload. The page is still ugly, but the font and the background changed - proof the stylesheet is actually linked.",
+   "check": "If nothing changed, the <link> tag path is wrong. Open the Network tab and look for the 404 on style.css."
+  },
+  {
+   "id": "2",
+   "mins": 4,
+   "layer": "css",
+   "todo": "C3 + C4 + C5",
+   "title": "Layout: a container, a grid, and one card rule",
+   "say": [
+    "Three rules turn a stack of text into an application.",
+    ".wrap centres the content and keeps it off the edges on a phone.",
+    ".grid is the two-column split. Point out that 1.05fr and 0.95fr is just 'the left one slightly wider' - fr units are proportions, not pixels.",
+    ".card is written once and used by every panel on the page. That is the whole idea of a class."
+   ],
+   "code": {
+    "lang": "css",
+    "text": ".wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }\n\n/* ---- top bar ---- */\n.topbar {\n  background: var(--surface);\n  border-bottom: 1px solid var(--line);\n  position: sticky; top: 0; z-index: 10;\n}\n\n.grid {\n  display: grid;\n  grid-template-columns: 1.05fr 0.95fr;\n  gap: 20px;\n  padding-top: 24px;\n  padding-bottom: 32px;\n  align-items: start;\n}\n\n.card {\n  background: var(--surface);\n  border: 1px solid var(--line);\n  border-radius: var(--radius);\n  box-shadow: var(--shadow);\n  padding: 22px;\n  position: relative;\n}"
+   },
+   "show": "Reload. The form and the receipt sit side by side in two white cards. This is the moment it starts looking like software.",
+   "check": "Narrow the window hard. It will look wrong - that is C9's job later, so leave it."
+  },
+  {
+   "id": "3",
+   "mins": 4,
+   "layer": "css",
+   "todo": "C6",
+   "title": "Make the form controls look like this decade",
+   "say": [
+    "font: inherit is the single most valuable line here. Without it, inputs keep the browser's default 13px Arial and look pasted on.",
+    "Spend a minute on :focus-visible. Tab through the form with and without it. Somebody navigating by keyboard cannot use the form without that ring, and it is two lines."
+   ],
+   "code": {
+    "lang": "css",
+    "text": "input[type=\"text\"], select {\n  width: 100%;\n  padding: 11px 13px;\n  font: inherit;\n  font-size: 15px;\n  color: var(--ink);\n  background: var(--surface);\n  border: 1px solid var(--line);\n  border-radius: 10px;\n  transition: border-color .15s, box-shadow .15s;\n}\ninput:focus-visible, select:focus-visible, button:focus-visible {\n  outline: none;\n  border-color: var(--brand);\n  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 22%, transparent);\n}"
+   },
+   "show": "Tab through the form and watch the focus ring move.",
+   "check": "Ask the room to put their mouse down and reach the submit button with the keyboard only."
+  },
+  {
+   "id": "4",
+   "mins": 5,
+   "layer": "js",
+   "todo": "J1",
+   "title": "The first function, and the trap inside it",
+   "say": [
+    "Open the console and run Number('') before showing the function. It is 0. Let that sit for a second.",
+    "So an empty amount box becomes zero, and zero passes any test that only asks 'is this a number'. That is why the blank check comes first and the conversion second.",
+    "This function takes text and returns a number. It touches nothing else, which is why we can test it in the console right now."
+   ],
+   "code": {
+    "lang": "js",
+    "text": "function toAmount(text) {\n  if (typeof text !== 'string' || text.trim() === '') { return NaN; }\n  return Number(text);\n}"
+   },
+   "show": "In the console: toAmount('48.20'), toAmount(''), toAmount('twelve'). Three answers, three different reasons.",
+   "check": "Number.isNaN(toAmount('')) is true. If it is false, the blank check is missing or in the wrong order."
+  },
+  {
+   "id": "5",
+   "mins": 7,
+   "layer": "js",
+   "todo": "J2",
+   "title": "Validation: is this data usable at all?",
+   "say": [
+    "Validation never asks what the company allows. It only asks whether the request makes sense as data. Keep saying that - it is the idea the whole task is built on.",
+    "Notice it returns an object, not true or false. That is how the page knows WHICH field to turn red and WHAT to say under it.",
+    "Each check returns the moment it finds a problem. Later checks cannot run on data you already know is broken."
+   ],
+   "code": {
+    "lang": "js",
+    "text": "function validate(form) {\n  const errors = {};\n\n  if (!findAccount(form.account)) {\n    errors.account = 'Choose an account to pay from.';\n  }\n\n  const payee = form.payee.trim();\n  if (payee === '') {\n    errors.payee = 'Payee is required.';\n  } else if (payee.length < 2) {\n    errors.payee = 'Payee must be at least 2 characters.';\n  } else if (payee.length > POLICY.maxPayeeLength) {\n    errors.payee = 'Payee must be ' + POLICY.maxPayeeLength +\n                   ' characters or fewer.';\n  }\n\n  const amount = toAmount(form.amount);\n  if (form.amount.trim() === '') {\n    errors.amount = 'Enter an amount.';\n  } else if (Number.isNaN(amount)) {\n    errors.amount = 'Amount must be a number.';\n  } else if (amount <= 0) {\n    errors.amount = 'Amount must be greater than 0.';\n  } else if (Math.round(amount * 100) !== amount * 100) {\n    errors.amount = 'Amount can have at most 2 decimals.';\n  } else if (amount > POLICY.maxPerPayment) {\n    errors.amount = 'Single payments are capped at ' +\n                    money(POLICY.maxPerPayment) + '.';\n  }\n\n  if (!CATEGORIES.includes(form.category)) {\n    errors.category = 'Choose a category.';\n  }\n\n  if (form.reference.length > POLICY.maxReferenceLength) {\n    errors.reference = 'Reference must be ' + POLICY.maxReferenceLength +\n                       ' characters or fewer.';\n  }\n\n  return errors;\n}"
+   },
+   "show": "In the console: validate({account:'CHK-4471', payee:'', amount:'0', category:'', reference:''}). Three keys come back.",
+   "check": "A good request returns {} - an empty object, not undefined.",
+   "ask": "Why does this function not know about the account balance?"
+  },
+  {
+   "id": "6",
+   "mins": 6,
+   "layer": "js",
+   "todo": "J7 + J8",
+   "title": "Read the form, and show the errors",
+   "say": [
+    "Here is the line between the layers, in two functions.",
+    "readForm goes to the page and collects five values. showErrors goes back to the page and sets text and class names.",
+    "showErrors does not choose a colour. It adds the class 'invalid' and CSS decides what that means. If you ever type a colour in app.js, stop."
+   ],
+   "code": {
+    "lang": "js",
+    "text": "function readForm() {\n  return {\n    account:   $('#account').value,\n    payee:     $('#payee').value,\n    amount:    $('#amount').value,\n    category:  $('#category').value,\n    reference: $('#reference').value\n  };\n}\n\nfunction showErrors(errors, touchedOnly) {\n  for (const name of FIELDS) {\n    const input = $('#' + name);\n    const slot = document.querySelector('.err[data-for=\"' + name + '\"]');\n    const message = errors[name];\n    const show = message && (!touchedOnly || input.dataset.touched === 'yes');\n\n    slot.textContent = show ? message : '';\n    input.classList.toggle('invalid', Boolean(show));\n    input.classList.toggle('valid',\n      !message && input.value.trim() !== '' && name !== 'reference');\n  }\n}"
+   },
+   "show": "Nothing visible yet - the classes are being set, but CSS does not know what they look like. That is the next step, and the order is deliberate.",
+   "check": "In the console: showErrors({payee:'test message'}) and then inspect the payee input. It has class 'invalid'."
+  },
+  {
+   "id": "7",
+   "mins": 3,
+   "layer": "css",
+   "todo": "C7",
+   "title": "Now tell CSS what 'wrong' looks like",
+   "say": [
+    "Three rules, and the invisible work from the last step becomes visible.",
+    ".err:empty { display: none } is the neat part - the message element is always in the HTML, and it only takes up space when JavaScript has put text in it. No layout jump."
+   ],
+   "code": {
+    "lang": "css",
+    "text": "input.invalid, select.invalid { border-color: var(--bad); background: var(--bad-bg); }\ninput.valid, select.valid     { border-color: var(--ok); }\n\n.err { color: var(--bad); font-size: 13px; margin: 6px 0 0; min-height: 1px; }\n.err:empty { display: none; }"
+   },
+   "show": "Reload, run showErrors in the console again. Red border, red message. Same JavaScript as a minute ago - only the stylesheet changed.",
+   "check": "Clear the error and the space collapses. If it does not, the :empty rule is missing."
+  },
+  {
+   "id": "8",
+   "mins": 6,
+   "layer": "js",
+   "todo": "J3 + J4",
+   "title": "Two questions the form cannot answer",
+   "say": [
+    "These are the first functions that need HISTORY, not just the form.",
+    "postedToday loops every transaction and adds up today's. This is the accumulator pattern from Week 7 - start outside the loop, add inside.",
+    "recentDuplicate is Week 13's duplicate-submission problem arriving early. Same payee, same amount, inside a minute: almost certainly one payment sent twice.",
+    "Say plainly: no amount of checking the form could answer either of these. That is why the data lives in an array."
+   ],
+   "code": {
+    "lang": "js",
+    "text": "function postedToday(code) {\n  const midnight = new Date();\n  midnight.setHours(0, 0, 0, 0);\n  let total = 0;\n  for (const t of transactions) {\n    if (t.account === code && t.status === 'POSTED' &&\n        t.created >= midnight.getTime()) {\n      total = total + t.amount;\n    }\n  }\n  return total;\n}\n\nfunction recentDuplicate(code, payee, amount) {\n  const cutoff = Date.now() - POLICY.duplicateWindowMs;\n  for (const t of transactions) {\n    if (t.account === code && t.payee === payee &&\n        t.amount === amount && t.created >= cutoff) {\n      return t;\n    }\n  }\n  return null;\n}"
+   },
+   "show": "Nothing on screen. Both are console-testable once there are a few transactions.",
+   "check": "postedToday('CHK-4471') is 0 before any payments."
+  },
+  {
+   "id": "9",
+   "mins": 8,
+   "layer": "js",
+   "todo": "J5",
+   "title": "The business rules - and the order argument",
+   "say": [
+    "The data is already known to be good. These decide what happens to it.",
+    "Read the four branches out loud in order. Then ask the room: a $9,500 payment from an account holding $4,100, sent twice in ten seconds - which message should the user see?",
+    "There is no single correct answer, but there is a correct method: pick the one most useful to the person reading it. Put a comment above the chain saying why you chose that order.",
+    "This is the highest-value conversation in the whole demo. Do not rush it."
+   ],
+   "code": {
+    "lang": "js",
+    "text": "function applyRules(form) {\n  const account = findAccount(form.account);\n  const amount = toAmount(form.amount);\n  const payee = form.payee.trim();\n\n  if (amount > account.balance) {\n    return { status: 'DECLINED', reason: 'INSUFFICIENT_FUNDS',\n             message: 'Balance is ' + money(account.balance) +\n                      '. This payment is ' + money(amount) + '.' };\n  }\n\n  const spent = postedToday(account.code);\n  if (spent + amount > POLICY.maxPerDay) {\n    return { status: 'DECLINED', reason: 'DAILY_LIMIT',\n             message: 'The daily limit is ' + money(POLICY.maxPerDay) +\n                      '. ' + money(POLICY.maxPerDay - spent) + ' left today.' };\n  }\n\n  if (recentDuplicate(account.code, payee, amount)) {\n    return { status: 'HELD', reason: 'POSSIBLE_DUPLICATE',\n             message: 'The same payee and amount went through less than a ' +\n                      'minute ago. Held for review.' };\n  }\n\n  if (amount >= POLICY.reviewAtOrAbove) {\n    return { status: 'HELD', reason: 'REVIEW_REQUIRED',\n             message: 'Payments of ' + money(POLICY.reviewAtOrAbove) +\n                      ' or more are reviewed before release.' };\n  }\n\n  return { status: 'POSTED', reason: 'OK',\n           message: 'Payment posted to the account.' };\n}"
+   },
+   "show": "Swap the first two branches live, reload, and send $9,500 from the aid account. The answer changes. Nothing was broken - the order IS the policy.",
+   "check": "Put it back. Every branch returns the same shape: status, reason, message.",
+   "ask": "Which of these four rules could you have written in CSS? None. Why not?"
+  },
+  {
+   "id": "10",
+   "mins": 6,
+   "layer": "js",
+   "todo": "J6",
+   "title": "One payment, end to end",
+   "say": [
+    "Validate, then apply the rules, then write it down. A rejected request never reaches the rules - look at the early return.",
+    "Three statuses, not two. REJECTED means the data was unusable. HELD means the data was fine and policy stopped it. They are different things and the user deserves to know which happened.",
+    "unshift puts the newest transaction at the front of the array, which is why the ledger needs no sorting later."
+   ],
+   "code": {
+    "lang": "js",
+    "text": "function processPayment(form) {\n  const errors = validate(form);\n  if (Object.keys(errors).length > 0) {\n    return { ok: false, errors: errors };\n  }\n\n  const decision = applyRules(form);\n  const account = findAccount(form.account);\n  const amount = toAmount(form.amount);\n\n  counter = counter + 1;\n  const txn = {\n    id: 'TXN-' + new Date().getFullYear() + '-' +\n        String(counter).padStart(4, '0'),\n    created: Date.now(),\n    account: account.code,\n    payee: form.payee.trim(),\n    amount: amount,\n    category: form.category,\n    reference: form.reference.trim(),\n    status: decision.status,\n    reason: decision.reason,\n    message: decision.message\n  };\n\n  transactions.unshift(txn);\n  if (txn.status === 'POSTED') {\n    account.balance = Math.round((account.balance - amount) * 100) / 100;\n  }\n\n  return { ok: true, transaction: txn };\n}"
+   },
+   "show": "In the console: processPayment({account:'CHK-4471', payee:'Bursar', amount:'840.25', category:'tuition', reference:''}). A whole transaction object comes back.",
+   "check": "Run it again with amount '9999999' and watch it come back ok:false with an errors object instead."
+  },
+  {
+   "id": "11",
+   "mins": 7,
+   "layer": "js",
+   "todo": "J9 + J10 + J11",
+   "title": "Put the answer on the page",
+   "say": [
+    "Three render functions, and none of them decide anything. They take data that already exists and turn it into HTML.",
+    "renderAccounts is called again after every payment, which is why the balance on screen is never stale.",
+    "In renderLedger, point at the totals loop. That is the same accumulator from step 8, except now the room can see the number change."
+   ],
+   "code": {
+    "lang": "js",
+    "text": "function renderReceipt(txn) {\n  const cls = txn.status.toLowerCase();\n  $('#result').innerHTML =\n    '<div class=\"receipt\">' +\n      '<h2>Receipt</h2>' +\n      '<div class=\"verdict\"><span class=\"pill ' + cls + '\">' +\n        txn.status + '</span></div>' +\n      '<p>' + txn.message + '</p>' +\n      '<div class=\"rows\">' +\n        row('Reference', '<span class=\"mono\">' + txn.id + '</span>') +\n        row('Paid to', txn.payee) +\n        row('Amount', '<span class=\"mono\">' + money(txn.amount) + '</span>') +\n        row('From', txn.account) +\n        row('Category', txn.category) +\n        (txn.reference ? row('Note', txn.reference) : '') +\n        row('Time', new Date(txn.created).toLocaleTimeString()) +\n      '</div>' +\n    '</div>';\n}\n\nfunction renderLedger() {\n  const body = $('#ledger');\n\n  if (transactions.length === 0) {\n    body.innerHTML = '<tr><td colspan=\"4\" class=\"muted\">' +\n                     'No payments yet.</td></tr>';\n  } else {\n    let html = '';\n    for (const t of transactions.slice(0, 8)) {\n      html += '<tr>' +\n        '<td class=\"mono\">' + t.id + '</td>' +\n        '<td>' + t.payee + '</td>' +\n        '<td class=\"r mono\">' + money(t.amount) + '</td>' +\n        '<td><span class=\"pill ' + t.status.toLowerCase() + '\">' +\n            t.status + '</span></td></tr>';\n    }\n    body.innerHTML = html;\n  }\n\n  /* the accumulator pattern from Week 7, on screen */\n  let posted = 0, held = 0, total = 0;\n  for (const t of transactions) {\n    if (t.status === 'POSTED') { posted++; total = total + t.amount; }\n    else if (t.status === 'HELD') { held++; }\n  }\n  $('#totals').innerHTML =\n    tile(transactions.length, 'submitted') +\n    tile(posted, 'posted') +\n    tile(money(total), 'paid out');\n  void held;\n}"
+   },
+   "show": "Still nothing until the submit handler exists - these are being defined, not called.",
+   "check": "Call renderLedger() by hand in the console. The empty-state row appears."
+  },
+  {
+   "id": "12",
+   "mins": 3,
+   "layer": "css",
+   "todo": "C8",
+   "title": "One pill, three meanings",
+   "say": [
+    "One shape rule, three colour variants. JavaScript writes the class name from the status; CSS decides what each one looks like.",
+    "This is the clearest example of the split on the whole page. The word DECLINED is JavaScript's. The fact that it is red is CSS's."
+   ],
+   "code": {
+    "lang": "css",
+    "text": ".pill { display: inline-block; padding: 3px 10px; border-radius: 999px;\n        font-size: 12px; font-weight: 700; letter-spacing: .02em; }\n.pill.posted   { background: var(--ok-bg);   color: var(--ok); }\n.pill.held     { background: var(--warn-bg); color: var(--warn); }\n.pill.declined { background: var(--bad-bg);  color: var(--bad); }"
+   },
+   "show": "Nothing yet - no receipt has been drawn. Next step lights it up.",
+   "check": "Three variants, all readable. Make them check the contrast, not just the vibe."
+  },
+  {
+   "id": "13",
+   "mins": 7,
+   "layer": "js",
+   "todo": "J12",
+   "title": "Wire it up - and watch the whole thing come alive",
+   "say": [
+    "preventDefault() is the line that stops the page reloading. Without it the browser does what it did in 1998 and everything you just wrote is thrown away.",
+    "The blur handler is why the form does not shout at you while you are still typing. It only complains about a field once you have left it.",
+    "The setTimeout is honest theatre - it gives the busy state something to be busy during. In Week 10 that pause becomes a real request to a real server, and nothing else in this file changes."
+   ],
+   "code": {
+    "lang": "js",
+    "text": "document.addEventListener('DOMContentLoaded', function () {\n  // ... the blur and input handlers ...\n\n  $('#payForm').addEventListener('submit', function (event) {\n    event.preventDefault();          // no reload - we handle it here\n\n    for (const name of FIELDS) { $('#' + name).dataset.touched = 'yes'; }\n\n    const form = readForm();\n    const errors = validate(form);\n    showErrors(errors, false);\n\n    if (Object.keys(errors).length > 0) {\n      $('#result').innerHTML =\n        '<h2>Receipt</h2><p class=\"muted\">Nothing was sent. ' +\n        Object.keys(errors).length +\n        ' field(s) need fixing first.</p>';\n      $('#' + Object.keys(errors)[0]).focus();\n      return;\n    }\n\n    /* A short pause so the pending state is visible. A real app would\n       be waiting on a server here - that is Week 10. */\n    const button = $('#submitBtn');\n    button.classList.add('busy');\n    button.disabled = true;\n\n    window.setTimeout(function () {\n      const result = processPayment(form);\n      button.classList.remove('busy');\n      button.disabled = false;\n\n      renderReceipt(result.transaction);\n      renderAccounts();\n      renderLedger();\n\n      if (result.transaction.status === 'POSTED') {\n        $('#payForm').reset();\n        $('#refCount').textContent = '0';\n        for (const name of FIELDS) {\n          $('#' + name).dataset.touched = '';\n          $('#' + name).classList.remove('valid', 'invalid');\n        }\n        renderAccounts();\n      }\n    }, 450);\n  });"
+   },
+   "show": "Fill in the form and press Send payment. Receipt, balance drop, ledger row, totals. The app is finished.",
+   "check": "Try all three outcomes: 840.25 posts, 6200 is held, 9500 from the aid account is declined."
+  },
+  {
+   "id": "14",
+   "mins": 3,
+   "layer": "css",
+   "todo": "C9",
+   "title": "Make it survive a phone",
+   "say": [
+    "Three lines. The HTML does not change and the JavaScript does not change - only the stylesheet has an opinion about screen width.",
+    "Resize the window slowly and let them watch it snap to one column."
+   ],
+   "code": {
+    "lang": "css",
+    "text": "@media (max-width: 900px) {\n  .grid { grid-template-columns: 1fr; }\n  .two  { grid-template-columns: 1fr; }\n  .totals { grid-template-columns: 1fr 1fr; }\n}"
+   },
+   "show": "Drag the window narrow. Two columns become one.",
+   "check": "Open DevTools device mode and try an iPhone SE. Nothing should overflow sideways."
+  },
+  {
+   "id": "15",
+   "mins": 5,
+   "layer": "both",
+   "todo": "S1 + S3",
+   "title": "The two stretch pieces worth demoing",
+   "say": [
+    "Dark mode is eight lines because step 1 was done properly. Redefine the tokens, change nothing else. If a student hard-coded colours below :root, this is where it hurts - and that is the lesson.",
+    "The layer view is one CSS block plus one line of JavaScript. Show the toggle, then show how little code it took."
+   ],
+   "code": {
+    "lang": "css",
+    "text": "@media (prefers-color-scheme: dark) {\n  :root {\n    --bg: #0f1216; --surface: #171b21; --ink: #e9edf2; --muted: #9aa4b2;\n    --line: #262c35; --ok-bg: #11291c; --warn-bg: #2a2110; --bad-bg: #2b1414;\n    --ok: #5fd08a; --warn: #e3b25f; --bad: #ff8b84;\n    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);\n  }\n}\n\n/* and the layer view, in full: */\n[data-layer]::before {\n  content: attr(data-layer-note);\n  position: absolute; top: -11px; left: 14px;\n  font-size: 11px; font-weight: 700; letter-spacing: .03em;\n  padding: 2px 9px; border-radius: 999px;\n  opacity: 0; pointer-events: none; transition: opacity .2s;\n}\n[data-layer=\"css\"]::before { background: #2563eb; color: #fff; }\n[data-layer=\"js\"]::before  { background: #a855f7; color: #fff; }\n\nbody.show-layers [data-layer] { position: relative; }\nbody.show-layers [data-layer]::before { opacity: 1; }\nbody.show-layers [data-layer=\"css\"] { outline: 2px dashed #2563eb; outline-offset: 3px; }\nbody.show-layers [data-layer=\"js\"]  { outline: 2px dashed #a855f7; outline-offset: 3px; }"
+   },
+   "show": "Switch the OS to dark mode, then tick the layer toggle.",
+   "check": "If dark mode looks broken, somebody wrote a colour outside the tokens. Find it together - it takes thirty seconds and the point lands permanently."
+  }
+ ],
+ "total": 81
+}

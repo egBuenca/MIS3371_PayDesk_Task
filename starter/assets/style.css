@@ -1,0 +1,85 @@
+/* ===================================================================
+   PayDesk - style.css  (STARTER)
+
+   The CSS layer is yours. Nine jobs, in a sensible order. Each one is
+   small; together they are the difference between a form and an app.
+
+   Nothing in this file may decide anything. If you ever need an
+   "if", you are in the wrong file.
+   =================================================================== */
+
+/* ---- TODO C1 ------------------------------------------------------
+   Define your design tokens on :root - at least a background, a
+   surface, a text colour, a muted text colour, a border colour, one
+   brand colour, and a radius. Name them once and use the names below.
+   Why: changing the brand colour later should be one line, not forty.
+   ------------------------------------------------------------------ */
+:root {
+  /* your tokens here */
+}
+
+/* ---- TODO C2 ------------------------------------------------------
+   Set the page basics: margin, background, text colour, font family,
+   and a comfortable line-height. Add box-sizing: border-box to all
+   elements so padding stops breaking your widths.
+   ------------------------------------------------------------------ */
+
+
+/* ---- TODO C3 ------------------------------------------------------
+   The .wrap container: a max width around 1100px, centred, with side
+   padding so nothing touches the edge on a phone.
+   ------------------------------------------------------------------ */
+
+
+/* ---- TODO C4 ------------------------------------------------------
+   The two-column layout. Use CSS grid on .grid, with the form on the
+   left and the receipt/activity stack on the right.
+   ------------------------------------------------------------------ */
+
+
+/* ---- TODO C5 ------------------------------------------------------
+   The .card surface: background, 1px border, rounded corners, a soft
+   shadow, and padding. Every panel on the page uses this one rule.
+   ------------------------------------------------------------------ */
+
+
+/* ---- TODO C6 ------------------------------------------------------
+   Form controls: make inputs and selects full width, with padding, a
+   border, rounded corners, and font: inherit so they stop looking
+   like 1998. Add a clear :focus-visible ring - keyboard users need to
+   see where they are.
+   ------------------------------------------------------------------ */
+
+
+/* ---- TODO C7 ------------------------------------------------------
+   The state classes. JavaScript adds and removes these; you decide
+   what they look like:
+     input.invalid   something is wrong with this field
+     input.valid     this field is filled in and fine
+     .err            the message under a field (hide it when empty)
+   ------------------------------------------------------------------ */
+
+
+/* ---- TODO C8 ------------------------------------------------------
+   Buttons, and the status pills. One .pill rule plus three variants:
+     .pill.posted    .pill.held    .pill.declined
+   Give each a background and a text colour that pass as readable.
+   ------------------------------------------------------------------ */
+
+
+/* ---- TODO C9 ------------------------------------------------------
+   Make it work on a phone: under 900px, collapse .grid and .two to a
+   single column. Test by narrowing the window, not by guessing.
+   ------------------------------------------------------------------ */
+
+
+/* ---- STRETCH ------------------------------------------------------
+   S1  Dark mode with @media (prefers-color-scheme: dark) - redefine
+       the tokens only, change nothing else.
+   S2  A pending state on the submit button while the payment is
+       processing (.primary.busy), using a CSS animation.
+   S3  The layer view: when body has .show-layers, outline every
+       element with a data-layer attribute and show its
+       data-layer-note as a floating label. Hint: [data-layer]::before
+       with content: attr(data-layer-note).
+   ------------------------------------------------------------------ */
