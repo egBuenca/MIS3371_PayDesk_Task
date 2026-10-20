@@ -15,7 +15,15 @@
    Why: changing the brand colour later should be one line, not forty.
    ------------------------------------------------------------------ */
 :root {
-  /* your tokens here */
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #04080c;
+  --muteText: #363e47;
+  --border: #fffc67;
+  --brand: #ea3737;
+  --radius:    14px;
+  --font: Helvetica, sans-serif;
+
 }
 
 /* ---- TODO C2 ------------------------------------------------------
@@ -24,24 +32,50 @@
    elements so padding stops breaking your widths.
    ------------------------------------------------------------------ */
 
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.5;
+}
 
 /* ---- TODO C3 ------------------------------------------------------
    The .wrap container: a max width around 1100px, centred, with side
    padding so nothing touches the edge on a phone.
    ------------------------------------------------------------------ */
 
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
 /* ---- TODO C4 ------------------------------------------------------
    The two-column layout. Use CSS grid on .grid, with the form on the
    left and the receipt/activity stack on the right.
    ------------------------------------------------------------------ */
 
+.grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 20px;
+  padding-top: 24px;
+  padding-bottom: 32px;
+  align-items: start;
+}
 
 /* ---- TODO C5 ------------------------------------------------------
    The .card surface: background, 1px border, rounded corners, a soft
    shadow, and padding. Every panel on the page uses this one rule.
    ------------------------------------------------------------------ */
 
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  position: relative;
+}
 
 /* ---- TODO C6 ------------------------------------------------------
    Form controls: make inputs and selects full width, with padding, a
