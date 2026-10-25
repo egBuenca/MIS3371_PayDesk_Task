@@ -412,4 +412,11 @@ document.addEventListener('DOMContentLoaded', function () {
          result appears, so the app feels like it is doing something.
      S6  Wire #layerToggle to add and remove .show-layers on <body>.
      ---------------------------------------------------------------- */
+
+  $('#layerToggle').addEventListener('change', function (event) {
+    document.body.classList.toggle('show-layers', event.target.checked);
+  });
+  
 });
+
+

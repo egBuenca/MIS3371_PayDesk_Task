@@ -21,9 +21,12 @@
   --muteText: #363e47;
   --border: #85ecc1;
   --brand: #3788ea;
-  --error: #f93535;
+  --error: #f5b6b6;
   --error-bg: #f01c1cb9;
-  --valid: #92ed71;
+  --warn: #fff5ce;
+  --warn-bg: #ffe555;
+  --valid: #e9f2e6;
+  --valid-bg: #a5f75dda;
   --radius:    14px;
   --font: Helvetica, sans-serif;
 
@@ -59,6 +62,17 @@ body {
    left and the receipt/activity stack on the right.
    ------------------------------------------------------------------ */
 
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 10;
+}
+.bar { display: flex; align-items: center; justify-content: space-between;
+       min-height: 62px; gap: 16px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 18px; }
+.brand .dot { width: 12px; height: 12px; border-radius: 50%;
+              background: var(--brand); }
+              
 .grid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
@@ -67,6 +81,10 @@ body {
   padding-bottom: 32px;
   align-items: start;
 }
+
+.stack { display: grid; gap: 20px; }
+
+.small { font-size: 13.5px; color: var(--muteText);}
 
 /* ---- TODO C5 ------------------------------------------------------
    The .card surface: background, 1px border, rounded corners, a soft
@@ -130,9 +148,28 @@ input.valid, select.valid     { border-color: var(--valid); }
 
 .pill { display: inline-block; padding: 3px 10px; border-radius: 999px;
         font-size: 12px; font-weight: 700; letter-spacing: .02em; }
-.pill.posted   { background: var(--ok-bg);   color: var(--ok); }
+.pill.posted   { background: var(--valid-bg);   color: var(--valid); }
 .pill.held     { background: var(--warn-bg); color: var(--warn); }
-.pill.declined { background: var(--bad-bg);  color: var(--bad); }
+.pill.declined { background: var(--error-bg);  color: var(--error); }
+
+.ledger { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.ledger th { text-align: left; font-size: 12px; text-transform: uppercase;
+             letter-spacing: .04em; color: var(--muted);
+             border-bottom: 1px solid var(--line); padding: 8px 6px; }
+.ledger td { padding: 9px 6px; border-bottom: 1px solid var(--line);
+             font-size: 14px; }
+.ledger tr:last-child td { border-bottom: none; }
+.r { text-align: right; }
+
+.totals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+          margin-top: 4px; }
+.tile { background: var(--bg); border: 1px solid var(--line);
+        border-radius: 10px; padding: 12px; text-align: center; }
+.tile b { display: block; font-size: 20px; font-family: var(--font); }
+.tile span { font-size: 12px; color: var(--muteText); }
+
+.counter { text-align: right; color: var(--mutetext); font-size: 12px;
+           margin: 4px 0 0; font-family: var(--font); }
 
 /* ---- TODO C9 ------------------------------------------------------
    Make it work on a phone: under 900px, collapse .grid and .two to a
@@ -158,9 +195,9 @@ input.valid, select.valid     { border-color: var(--valid); }
 
 @media (prefers-color-scheme: dark) {
  :root {
- --bg: #0f1216; --surface: #171b21; --ink: #e9edf2; --muted: #9aa4b2;
- --line: #262c35; --ok-bg: #11291c; --warn-bg: #2a2110; --bad-bg: #2b1414;
- --ok: #5fd08a; --warn: #e3b25f; --bad: #ff8b84;
+ --bg: #0f1610; --surface: #171f21; --text: #e2f0de; --muteText: #779180;
+ --line: #262c35; --error-bg: #291811; --warn-bg: #2a2110; --valid-bg: #122911;
+ --valid: #297446; --warn: #b78f4a;
  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
  }
 }
